@@ -33,15 +33,13 @@ provider = TracerProvider()
 processor = BatchSpanProcessor(OTLPSpanExporter())
 provider.add_span_processor(processor)
 
+# show this in the log within the backend-flask app (STDOUT)
+simple_processor = SimpleSpanProcessor(ConsoleSpanExporter())
+provider.add_span_processor(simple_processor)
+
 # x-ray----------
 xray_url = os.getenv("AWS_XRAY_URL")
 xray_recorder.configure(service='backend-flask', dynamic_naming=xray_url)
-
-
-
-#show this in the log within the backend-flask
-Simple_SpanProcessor = SimpleSpanProcessor(ConsoleSpanExporter())
-provider.add_span_processor(simple_Processor)
 
 trace.set_tracer_provider(provider)
 tracer = trace.get_tracer(__name__)
