@@ -23,7 +23,6 @@ services:
       - "3000:3000"
     volumes:
       - ./frontend-react-js:/frontend-react-js
-      # daemonfile
   xray-daemon:
     image: "amazon/aws-xray-daemon"
     environment:
